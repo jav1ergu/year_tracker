@@ -17,19 +17,26 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 400px;
+    max-width: 600px;
 }
 
 h1 {
     color: #007BFF;
 }
 
-p {
-    font-size: 18px;
-    margin: 10px 0;
+#year-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-span {
-    font-weight: bold;
-    color: #007BFF;
+#year-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    width: calc(100% / 31);
+    box-sizing: border-box;
+}
+
+#year-table .passed {
+    background-color: red;
+    color: white;
 }

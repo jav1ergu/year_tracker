@@ -1,17 +1,26 @@
-// Get the current date
-const today = new Date();
-const year = today.getFullYear();
+document.addEventListener('DOMContentLoaded', () => {
+    const yearTable = document.getElementById('year-table');
+    const today = new Date();
+    const year = today.getFullYear();
+    const startOfYear = new Date(year, 0, 1);
+    const daysPassed = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
 
-// Calculate total days in the current year (accounting for leap years)
-const totalDays = new Date(year, 11, 31).getDate() === 31 ? 366 : 365;
+    let dayCounter = 1;
 
-// Calculate the number of days passed and left
-const startOfYear = new Date(year, 0, 1);
-const daysPassed = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
-const daysLeft = totalDays - daysPassed;
+    for (let month = 0; month < 12; month++) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const row = document.createElement('tr');
 
-// Update the webpage
-document.getElementById("current-date").textContent = today.toDateString();
-document.getElementById("days-passed").textContent = daysPassed;
-document.getElementById("days-left").textContent = daysLeft;
-document.getElementById("total-days").textContent = totalDays;
+        for (let day = 1; day <= daysInMonth; day++) {
+            const cell = document.createElement('td');
+            cell.textContent = day;
+            if (dayCounter <= daysPassed) {
+                cell.classList.add('passed');
+            }
+            row.appendChild(cell);
+            dayCounter++;
+        }
+        
+        yearTable.appendChild(row);
+    }
+});
